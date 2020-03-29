@@ -52,3 +52,19 @@ exports.updateTodo = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.deleteTodo = async (req, res, next) => {
+    try {
+        const todo = await TodoModel.findByIdAndDelete(
+            req.params.todoId
+        );
+
+        if(todo){
+            res.status(200).json(todo);
+        } else {
+            res.status(404).send();
+        }
+    } catch (error) {
+        next(error);
+    }
+}

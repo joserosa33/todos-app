@@ -66,4 +66,15 @@ describe(endpointUrl, () => {
         expect(response.body.title).toBe(testData.title);
         expect(response.body.done).toBe(testData.done);
     });
+
+    test('DELETE' + endpointUrl, async () => {
+        const testData = { title: 'Make integration test for PUT', done: true };
+        const response = await request(app)
+                            .delete(endpointUrl + newTodoId)
+                            .send();
+
+        expect(response.statusCode).toBe(200);
+        expect(typeof response.body).toBe('object');
+        expect(response.body.title).toBe(testData.title);
+    })
 });
